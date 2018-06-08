@@ -1,0 +1,11 @@
+version: '2'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        container_version: ${IMAGE_VERSION}
+    ports:
+      - "8080:80"
+    image: rvadim/k8s-handle-example:${IMAGE_VERSION}

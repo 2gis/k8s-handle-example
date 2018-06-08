@@ -1,0 +1,30 @@
+---
+common:
+  k8s_namespace: k8s-handle-test
+
+  app_name: example
+  app_port: 80  # Application(nginx) listen for this port in container. For java, python, go and other web servers its usually 3000, 5000, 8000 etc
+
+  replicas_count: 1
+  image_path: rvadim/k8s-handle-example   # Change it to your application image
+  image_version: "{{ env='IMAGE_VERSION' }}"    # Takes IMAGE_VERSION from environment
+
+  nginx_worker_process: 1 
+  nginx_worker_connections: 1024
+
+staging:
+  templates:
+  - template: configmap.yaml.j2
+  - template: deployment.yaml.j2
+  - template: service.yaml.j2
+
+production:
+  # After k8s-handle start this section will be merged with common section, so
+  # all common variables like app_name, app_port and other will be available in templates rendering.
+  # But replicas_count will be overrided to 3, due to defined here
+  replicas_count: 3
+
+  templates:
+  - template: configmap.yaml.j2
+  - template: deployment.yaml.j2
+  - template: service.yaml.j2
