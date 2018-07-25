@@ -1,6 +1,9 @@
 ---
 common:
-  k8s_namespace: k8s-handle-test
+  k8s_namespace: "{{ env='K8S_NAMESPACE' }}"
+  k8s_master_uri: "{{ env='K8S_MASTER_URI' }}"
+  k8s_ca_base64: "{{ env='K8S_CA_BASE64' }}"
+  k8s_token: "{{ env='K8S_TOKEN' }}"
 
   app_name: example
   app_port: 80  # Application(nginx) listen for this port in container. For java, python, go and other web servers its usually 3000, 5000, 8000 etc
