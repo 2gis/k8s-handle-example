@@ -24,8 +24,6 @@ spec:
         app: {{ app_name }}
     spec:
       terminationGracePeriodSeconds: {{ termination_grace_period_seconds | default('60') }}
-      nodeSelector:
-        role: worker
       volumes:
       - configMap:
           name: {{ app_name }}-nginx-conf
